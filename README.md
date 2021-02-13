@@ -508,3 +508,4 @@ Finally, run yarn test:evm and yarn test:ovm, and everything should pass!
 # optimism-uniswapv2-core
 # optimism-uniswapv2-core
 # optimism-rollup-uniswapv2-core
+# optimism-rollup-uniswapv2-example
