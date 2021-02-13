@@ -8,7 +8,9 @@ import { waffleV3 } from '@eth-optimism/ovm-toolchain' // custom OVM version of 
 
 // Determine which network we are on
 const isOVM = process.env.MODE === 'OVM'
-console.log(isOVM)
+if (!(isOVM)){console.log('Compiling EVM is: ', true)
+}else 
+console.log('Compiling OVM is: ', isOVM)
 
 // Get provider: We keep the same provider config that Uniswap tests were
 // already using, but generate the provider instance based on the test mode
