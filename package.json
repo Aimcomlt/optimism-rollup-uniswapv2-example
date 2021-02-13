@@ -2,11 +2,8 @@
   "name": "@uniswap/v2-core",
   "description": "🎛 Core contracts for the UniswapV2 protocol",
   "version": "1.0.1",
-  "homepage": "https://uniswap.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Uniswap/uniswap-v2-core"
-  },
+  "homepage": ".",
+
   "keywords": [
     "uniswap",
     "ethereum",
@@ -16,16 +13,20 @@
   ],
   "files": [
     "contracts",
-    "build"
+    "build",
+    "test",
+    "test/shared/config.ts"
   ],
   "engines": {
     "node": ">=10"
   },
   "devDependencies": {
+    "@eth-optimism/ovm-toolchain": "^0.0.2-alpha.2",
+    "@eth-optimism/solc": "0.5.16-alpha.7",
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
-    "ethereum-waffle": "^2.4.1",
+    "ethereum-waffle": "^3.2.1",
     "ethereumjs-util": "^6.2.0",
     "mocha": "^6.2.2",
     "prettier": "^1.19.1",
@@ -38,11 +39,22 @@
     "lint": "yarn prettier ./test/*.ts --check",
     "lint:fix": "yarn prettier ./test/*.ts --write",
     "clean": "rimraf ./build/",
-    "precompile": "yarn clean",
-    "compile": "waffle .waffle.json",
-    "pretest": "yarn compile",
-    "test": "mocha",
-    "prepublishOnly": "yarn test"
+    "precompile:evm": "yarn clean",
+    "precompile:ovm": "yarn clean",
+    "compile:evm": "waffle .waffle.json",
+    "compile:ovm": "waffle .waffle-ovm.json",
+    "pretest:evm": "yarn compile:evm",
+    "pretest:ovm": "yarn compile:ovm",
+    "test:evm": "yarn compile:evm && mocha",
+    "test:ovm": "export MODE=OVM && mocha",
+    "prepublishOnly": "yarn test:evm && yarn test:ovm"
   },
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "volta": {
+    "node": "10.23.3",
+    "yarn": "1.22.10"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }

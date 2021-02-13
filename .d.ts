@@ -1,0 +1,1 @@
+declare module '@eth-optimism/ovm-toolchain';
